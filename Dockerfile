@@ -4,11 +4,12 @@ MAINTAINER Ivan Udovin <wilcot@ya.ru>
 
 RUN	apt-get update \
 	&& apt-get install -y --no-install-recommends \
-		curl \
-		unzip \
+		rsync \
 		fp-compiler-3.0.0 \
 		gcc \
 		g++ \
+		curl \
+		unzip \
 	&& curl -LkSs \
 		https://github.com/alex65536/tester-web/releases/download/v0.1-beta/tsweb-0.1-beta-linux.zip \
 		-o /tmp/tsweb.zip \
