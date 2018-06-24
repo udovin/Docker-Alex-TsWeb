@@ -21,10 +21,12 @@ RUN	apt-get update \
 
 COPY config.ini /etc/.copy/var/tsweb/data/config.ini
 
-COPY start-tsweb.sh /start-tsweb.sh
-
 VOLUME /var/tsweb
 
 EXPOSE 80
+
+COPY start-tsweb.sh /start-tsweb.sh
+
+RUN chmod 0744 /start-tsweb.sh
 
 ENTRYPOINT ["/start-tsweb.sh"]
