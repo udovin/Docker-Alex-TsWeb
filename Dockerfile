@@ -30,7 +30,7 @@ RUN	apk add --no-cache rsync gcc g++ \
 	&& mkdir -p /etc/.copy/var/tsweb/data/ \
 	&& mv -f /tmp/files/config.ini /etc/.copy/var/tsweb/data/config.ini \
 	&& mv -f /tmp/files/start-tsweb.sh /start-tsweb.sh \
-	&& rm -rf /lib64 /tmp/* \
+	&& rm -rf /tmp/* \
 	&& chmod 0744 /start-tsweb.sh
 
 VOLUME /var/tsweb
