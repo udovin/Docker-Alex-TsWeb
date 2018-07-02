@@ -7,7 +7,7 @@ COPY files /tmp/files
 RUN	apt-get update \
 	&& apt-get install -y --no-install-recommends \
 		rsync \
-		fp-compiler-3.0.0 \
+		fp-compiler \
 		gcc \
 		g++ \
 		curl \
@@ -21,6 +21,7 @@ RUN	apt-get update \
 		curl \
 		unzip \
 	&& ln -s /var/tsweb /root/tsweb \
+	&& mkdir -p /etc/.copy/var/tsweb/data/ \
 	&& mv -f /tmp/files/config.ini /etc/.copy/var/tsweb/data/config.ini \
 	&& mv -f /tmp/files/start-tsweb.sh /start-tsweb.sh \
 	&& rm -rf /tmp/files \
