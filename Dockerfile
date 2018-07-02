@@ -17,7 +17,7 @@ RUN	apk add --no-cache rsync gcc g++ curl tar unzip \
 		-o /tmp/tsweb.zip \
 		https://github.com/alex65536/tester-web/releases/download/v0.1-beta/tsweb-0.1-beta-linux.zip \
 	&& unzip /tmp/tsweb.zip -d /etc \
-	&& apk delete curl tar unzip \
+	&& apk del curl tar unzip \
 	&& ln -s /var/tsweb /root/tsweb \
 	&& mkdir -p /etc/.copy/var/tsweb/data/ \
 	&& mv -f /tmp/files/config.ini /etc/.copy/var/tsweb/data/config.ini \
