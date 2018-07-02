@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ -z "$(ls /var/tsweb --hide='lost+found')" ]; then
+if [ -z "$(ls /var/tsweb)" ]; then
 	rsync -a /etc/.copy/var/tsweb/* /var/tsweb
 
 	echo 'Admin account created!'
