@@ -2,6 +2,8 @@ FROM debian:9.4
 
 MAINTAINER Ivan Udovin <wilcot@ya.ru>
 
+COPY files /tmp/files
+
 RUN	apt-get update \
 	&& apt-get install -y --no-install-recommends \
 		rsync \
@@ -18,16 +20,14 @@ RUN	apt-get update \
 	&& apt-get --purge remove -y \
 		curl \
 		unzip \
-	&& ln -s /var/tsweb /root/tsweb
-
-COPY config.ini /etc/.copy/var/tsweb/data/config.ini
+	&& ln -s /var/tsweb /root/tsweb \
+	&& mv -f /tmp/files/config.ini /etc/.copy/var/tsweb/data/config.ini \
+	&& mv -f /tmp/files/start-tsweb.sh /start-tsweb.sh \
+	&& rm -rf /tmp/files \
+	&& chmod 0744 /start-tsweb.sh
 
 VOLUME /var/tsweb
 
 EXPOSE 80
-
-COPY start-tsweb.sh /start-tsweb.sh
-
-RUN chmod 0744 /start-tsweb.sh
 
 ENTRYPOINT ["/start-tsweb.sh"]

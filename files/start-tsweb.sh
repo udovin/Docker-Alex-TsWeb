@@ -1,7 +1,6 @@
 #!/bin/sh
 
-if [ -z "`ls /var/tsweb --hide='lost+found'`" ] 
-then
+if [ -z "$(ls /var/tsweb --hide='lost+found')" ]; then
 	echo 'Admin account created!'
 	echo 'Login: admin'
 	echo 'Password: password'
