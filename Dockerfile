@@ -1,31 +1,28 @@
-FROM debian:9.4
+FROM alpine:3.7
 
 MAINTAINER Ivan Udovin <wilcot@ya.ru>
 
 COPY files /tmp/files
 
-RUN	apt-get update \
-	&& apt-get install -y --no-install-recommends \
-		rsync \
-		fp-compiler \
-		gcc \
-		g++ \
-		curl \
-		unzip \
+RUN	apk add --no-cache rsync gcc g++ curl tar unzip \
+	&& curl -kSs \
+		-o /tmp/fpc.tar \
+		"ftp://ftp.hu.freepascal.org/pub/fpc/dist/3.0.4/x86_64-linux/fpc-3.0.4.x86_64-linux.tar" \
+	&& tar -xf "/tmp/fpc.tar" -C /tmp \
+	&& cd /tmp/fpc-3.0.4.x86_64-linux \
+	&& mkdir /lib64 \
+	&& ln -s /lib/ld-musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2 \
+	&& echo -e '/usr\nN\nN\nN\n' | sh ./install.sh \
 	&& curl -LkSs \
-		https://github.com/alex65536/tester-web/releases/download/v0.1-beta/tsweb-0.1-beta-linux.zip \
 		-o /tmp/tsweb.zip \
+		https://github.com/alex65536/tester-web/releases/download/v0.1-beta/tsweb-0.1-beta-linux.zip \
 	&& unzip /tmp/tsweb.zip -d /etc \
-	&& rm -f /tmp/tsweb.zip \
-	&& apt-get --purge remove -y \
-		curl \
-		unzip \
-	&& rm -rf /var/lib/apt/lists/* \
+	&& apk delete curl tar unzip \
 	&& ln -s /var/tsweb /root/tsweb \
 	&& mkdir -p /etc/.copy/var/tsweb/data/ \
 	&& mv -f /tmp/files/config.ini /etc/.copy/var/tsweb/data/config.ini \
 	&& mv -f /tmp/files/start-tsweb.sh /start-tsweb.sh \
-	&& rm -rf /tmp/files \
+	&& rm -rf /tmp/* \
 	&& chmod 0744 /start-tsweb.sh
 
 VOLUME /var/tsweb
