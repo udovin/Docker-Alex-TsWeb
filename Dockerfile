@@ -17,7 +17,7 @@ RUN	apk add --no-cache rsync gcc g++ \
 	&& mkdir /lib64 \
 	&& ln -s /lib/ld-musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2 \
 	&& echo -e '/usr\nN\nN\nN\n' | sh ./install.sh \
-	&& find "/usr/lib/fpc/${FPC_VERSION}/units/${FPC_ARCH}/" \
+	&& find "/usr/lib/fpc/3.0.4/units/x86_64-linux/" \
 		-type d -mindepth 1 -maxdepth 1 \
 		-not -name 'fcl-base' \
 		-not -name 'rtl' \
