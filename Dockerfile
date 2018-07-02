@@ -20,6 +20,7 @@ RUN	apt-get update \
 	&& apt-get --purge remove -y \
 		curl \
 		unzip \
+	&& rm -rf /var/lib/apt/lists/* \
 	&& ln -s /var/tsweb /root/tsweb \
 	&& mkdir -p /etc/.copy/var/tsweb/data/ \
 	&& mv -f /tmp/files/config.ini /etc/.copy/var/tsweb/data/config.ini \
